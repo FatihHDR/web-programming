@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page Tailwind</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        primary: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="font-primary antialiased text-gray-800 bg-white">
+
+    <header class="bg-white border-b border-gray-200 fixed w-full z-20 top-0 start-0 shadow-sm">
+        <nav class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-3 lg:py-4">
+            <a href="#home" class="flex items-center gap-3">
+                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span>
+            </a>
+            <button type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 lg:hidden" aria-controls="navbar-default" aria-expanded="false" id="nav-toggle" aria-label="Toggle navigation">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+            <div class="hidden w-full lg:block lg:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
+                    <li><a href="#home" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0">Home</a></li>
+                    <li><a href="#about" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">About</a></li>
+                    <li><a href="#features" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Services</a></li>
+                    <li><a href="#partners" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Partners</a></li>
+                    <li><a href="#contact" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="home" class="pt-24 lg:pt-28">
+        <div class="relative">
+            <div class="mx-auto max-w-7xl">
+                <div class="relative z-10 pt-14 lg:w-full lg:max-w-2xl">
+                    <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" class="absolute inset-y-0 right-8 hidden h-full w-80 translate-x-1/2 transform fill-white lg:block">
+                        <polygon points="0,0 90,0 50,100 0,100" />
+                    </svg>
+                    <div class="relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0">
+                        <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
+                            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Data to enrich your business</h1>
+                            <p class="mt-6 text-lg leading-8 text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+                            <div class="mt-10 flex items-center gap-x-6">
+                                <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a>
+                                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <section id="about" class="bg-white py-24 sm:py-32">
+        <div class="max-w-screen-xl mx-auto flex flex-col justify-center px-4 sm:px-6">
+            <div class="text-center mb-8 sm:mb-10 md:mb-12">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-950 mb-4 sm:mb-5">About Us</h2>
+                <p class="text-pretty text-lg font-medium text-gray-500 sm:text-xl/8 max-w-3xl mx-auto">
+                    Cras enim ante, fringilla id suscipit ut, tempor commodo sapien. Praesent maximus nisl metus, eget venenatis erat auctor non. Nunc id nulla imperdiet, vehicula odio eu, lobortis lacus. Sed vel tincidunt quam. Phasellus accumsan tellus quis mi accumsan, non fringilla eros semper.
+                </p>
+            </div>
+            <div class="mx-auto max-w-4xl">
+                <img class="rounded-lg shadow-lg" src="https://i.ibb.co/6yYxL0j/profil-umm.png" alt="Video Profile UMM">
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="bg-white pb-24 sm:pb-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl lg:text-center">
+                <h2 class="text-base font-semibold leading-7 text-indigo-600">Deploy faster</h2>
+                <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Everything you need to deploy your app</p>
+                <p class="mt-6 text-lg leading-8 text-gray-600">Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners" class="bg-[#F3F4F6] py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="grid grid-cols-1 items-center gap-x-8 gap-y-16 lg:grid-cols-2">
+                <div class="mx-auto w-full max-w-xl lg:mx-0">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Trusted by the most innovative teams</h2>
+                    <p class="mt-6 text-lg leading-8 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue.</p>
+                </div>
+                <div class="mx-auto grid w-full max-w-xl grid-cols-2 items-center gap-y-12 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:pl-8">
+                    <img class="max-h-12 w-full object-contain" src="https://tailwindui.com/img/logos/tuple-logo-gray-900.svg" alt="Tuple" width="105" height="48">
+                    <img class="max-h-12 w-full object-contain" src="https://tailwindui.com/img/logos/reform-logo-gray-900.svg" alt="Reform" width="105" height="48">
+                    <img class="max-h-12 w-full object-contain" src="https://tailwindui.com/img/logos/savvycal-logo-gray-900.svg" alt="SavvyCal" width="105" height="48">
+                    <img class="max-h-12 w-full object-contain" src="https://tailwindui.com/img/logos/laravel-logo-gray-900.svg" alt="Laravel" width="105" height="48">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-xl text-center">
+                <h2 class="text-lg font-semibold leading-8 tracking-tight text-indigo-600">Testimonials</h2>
+                <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">We have worked with thousands of amazing people</p>
+            </div>
+            </div>
+
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 mt-24">
+            <div class="relative isolate overflow-hidden bg-gray-900 px-6 py-24 text-center shadow-2xl rounded-3xl sm:px-16">
+                <h2 class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">Boost your productivity today</h2>
+                <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">Incididunt sint fugiat pariatur cupidatat consectetur sit cillum anim id veniam aliqua proident excepteur commodo do ea.</p>
+                <div class="mt-10 flex items-center justify-center gap-x-6">
+                    <a href="#" class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Get started</a>
+                    <a href="#" class="text-sm font-semibold leading-6 text-white">Learn more <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-white">
+        <div class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
+            <nav class="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
+                <div class="pb-6"><a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">About</a></div>
+                <div class="pb-6"><a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Blog</a></div>
+                <div class="pb-6"><a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Jobs</a></div>
+                <div class="pb-6"><a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Press</a></div>
+            </nav>
+            <div class="mt-10 flex justify-center space-x-10">
+                <a href="#" class="text-gray-400 hover:text-gray-500" aria-label="Twitter">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M16.999 4.5c-1.107 0-2.03.39-2.7 1.13-.65.72-.994 1.72-.94 2.89l.07 1.4-1.42-.17c-2.59-.31-4.86-1.59-6.52-3.63l-.94-1.18-.24 1.38c-.2 1.2-.04 2.3.49 3.22.45.8 1.14 1.42 2.02 1.84l1.2.56-1.33.06c-.4.01-.82-.04-1.24-.15l-.26-.07.04.25c.19 1.23 1.33 2.51 2.82 2.85l1.04.24-.9.54c-.87.52-1.9.81-2.94.82-.49 0-.98-.05-1.45-.14.95 1.54 2.7 2.48 4.68 2.5-1.86 1.45-4.2 2.24-6.6 2.22-1.07 0-2.12-.13-3.1-.38 2.45 1.64 5.35 2.52 8.36 2.5 9.81 0 15.18-8.38 14.86-15.9 1.03-.78 1.92-1.72 2.63-2.8-.96.44-2 .73-3.09.86 1.11-.66 1.95-1.7 2.35-2.96-1.04.6-2.18 1.02-3.35 1.26-.99-1.1-2.37-1.74-3.81-1.73z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-gray-500" aria-label="Instagram">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M7 2c-2.75 0-5 2.25-5 5v10c0 2.75 2.25 5 5 5h10c2.75 0 5-2.25 5-5V7c0-2.75-2.25-5-5-5H7zm0 2h10c1.68 0 3 1.32 3 3v10c0 1.68-1.32 3-3 3H7c-1.68 0-3-1.32-3-3V7c0-1.68 1.32-3 3-3zm12 1a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 0-2zm-7 2c-2.75 0-5 2.25-5 5s2.25 5 5 5 5-2.25 5-5-2.25-5-5-5zm0 2c1.67 0 3 1.33 3 3s-1.33 3-3 3-3-1.33-3-3 1.33-3 3-3z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-gray-500" aria-label="LinkedIn">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.71h.05c.53-.96 1.83-1.98 3.77-1.98 4.03 0 4.78 2.65 4.78 6.09V21H17v-5.43c0-1.3-.02-2.97-1.81-2.97-1.81 0-2.09 1.41-2.09 2.86V21h-4V9z" />
+                    </svg>
+                </a>
+            </div>
+            <p class="mt-10 text-center text-xs leading-5 text-gray-500">&copy; 2024 Your Company, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('navbar-default');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', String(!isExpanded));
+                navMenu.classList.toggle('hidden');
+            });
+
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 1024) {
+                        navMenu.classList.add('hidden');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        }
+    </script>
+
+</body>
+</html>
