@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz - Test Your Knowledge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .animate-slideIn {
+            animation: slideIn 0.4s ease-out;
+        }
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen relative overflow-x-hidden">
+    
+    <!-- Subtle background pattern -->
+    <div class="fixed inset-0 -z-10">
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-100 rounded-full blur-3xl opacity-30"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-6 md:py-12 max-w-5xl">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-8 md:mb-12">
+            <div class="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-blue-50 rounded-full border border-blue-100">
+                <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <span class="text-sm font-medium text-blue-700">Interactive Learning</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-800 mb-3">
+                Knowledge Quiz
+            </h1>
+            <p class="text-slate-600 text-lg md:text-xl max-w-2xl mx-auto">
+                Challenge yourself with engaging questions
+            </p>
+        </header>
+
+        <!-- Quiz Card -->
+        <div class="glass-morphism rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 overflow-hidden">
+            
+            <!-- Quiz Container -->
+            <div id="quiz-container" class="p-6 md:p-10">
+                
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-baseline mb-3">
+                        <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Question Progress</h3>
+                        <span id="progress-text" class="font-display text-lg font-bold text-slate-800">1/5</span>
+                    </div>
+                    <div class="relative h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div id="progress-bar" class="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full transition-all duration-700 ease-out" style="width: 20%"></div>
+                    </div>
+                </div>
+
+                <!-- Question Display -->
+                <div id="question-container" class="mb-10 animate-slideIn">
+                    <div class="mb-8 p-6 bg-gradient-to-br from-slate-50 to-blue-50/30 rounded-2xl border border-slate-100">
+                        <span class="inline-block px-3 py-1 bg-white rounded-lg text-sm font-semibold text-slate-500 mb-3 border border-slate-200">Question <span id="question-number">1</span></span>
+                        <h2 id="question" class="text-2xl md:text-3xl font-display font-semibold text-slate-800 leading-tight"></h2>
+                    </div>
+                    
+                    <!-- Options Container -->
+                    <div id="options" class="space-y-3 md:space-y-4"></div>
+                </div>
+
+                <!-- Bottom Navigation -->
+                <div class="flex items-center justify-between pt-6 border-t border-slate-200">
+                    <div id="feedback" class="text-base font-semibold"></div>
+                    <button id="next-btn" class="group relative px-8 py-3.5 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-xl transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-slate-800 overflow-hidden" disabled>
+                        <span class="relative z-10 flex items-center gap-2">
+                            Next Question
+                            <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Container -->
+            <div id="result-container" class="p-6 md:p-10 hidden">
+                <div class="text-center max-w-2xl mx-auto">
+                    
+                    <!-- Score Circle -->
+                    <div class="relative inline-flex items-center justify-center mb-8">
+                        <div class="w-48 h-48 rounded-full bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500 p-1 shadow-2xl">
+                            <div class="w-full h-full rounded-full bg-white flex items-center justify-center">
+                                <div class="text-center">
+                                    <div id="score" class="text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-cyan-600"></div>
+                                    <div class="text-sm font-semibold text-slate-500 mt-1">Score</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result Message -->
+                    <div class="mb-8">
+                        <h2 class="text-3xl md:text-4xl font-display font-bold text-slate-800 mb-3">
+                            Quiz Complete!
+                        </h2>
+                        <p id="score-message" class="text-xl md:text-2xl font-semibold text-slate-600"></p>
+                        <p id="score-percentage" class="text-base text-slate-500 mt-2"></p>
+                    </div>
+
+                    <!-- Performance Card -->
+                    <div class="bg-gradient-to-br from-slate-50 to-blue-50/30 rounded-2xl p-6 mb-8 border border-slate-100">
+                        <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Performance Summary</h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-display font-bold text-green-600" id="correct-count">0</div>
+                                <div class="text-xs text-slate-500 mt-1">Correct</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-display font-bold text-red-600" id="wrong-count">0</div>
+                                <div class="text-xs text-slate-500 mt-1">Wrong</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-display font-bold text-slate-600" id="total-count">5</div>
+                                <div class="text-xs text-slate-500 mt-1">Total</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Restart Button -->
+                    <button id="restart-btn" class="group relative inline-flex items-center gap-3 px-8 py-4 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-xl transition-all duration-300 overflow-hidden">
+                        <svg class="w-5 h-5 transition-transform group-hover:rotate-180 duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        <span class="relative z-10">Take Quiz Again</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-8 text-sm text-slate-500">
+            <p>Built with JavaScript ES6 + jQuery + Tailwind CSS</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
