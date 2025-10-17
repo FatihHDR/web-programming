@@ -52,12 +52,12 @@ const quizData = [
     }
 ];
 
-// State management menggunakan let/const (Materi 1)
+// State management
 let currentQuestion = 0;
 let score = 0;
 let selectedAnswer = null;
 
-// Arrow function untuk inisialisasi quiz (Materi 2)
+// Arrow function
 const initQuiz = () => {
     currentQuestion = 0;
     score = 0;
@@ -67,28 +67,28 @@ const initQuiz = () => {
     loadQuestion();
 };
 
-// Arrow function untuk load pertanyaan (Materi 2)
+// Arrow function buat load pertanyaan
 const loadQuestion = () => {
     const question = quizData[currentQuestion];
     selectedAnswer = null;
     
-    // Update progress menggunakan template literal (Materi 3)
+    // Update progress pakai template literal
     const progress = ((currentQuestion + 1) / quizData.length) * 100;
     $('#progress-bar').css('width', `${progress}%`);
     $('#progress-text').text(`${currentQuestion + 1}/${quizData.length}`);
     $('#question-number').text(currentQuestion + 1);
     
-    // Display question menggunakan template literal (Materi 3)
+    // Display question pakai template literal
     $('#question').text(question.question);
     
-    // Clear previous options
+    // Menghilangkan opsi sebelumnya
     $('#options').empty();
     $('#feedback').empty();
     $('#next-btn').prop('disabled', true);
     
-    // Generate options menggunakan array method map (Materi 7)
+    // Generate options buat array method map
     question.options.map((option, index) => {
-        // Template literal untuk create HTML (Materi 3)
+        // Template literal buat create HTML
         const optionHTML = `
             <button class="option-btn group w-full text-left px-5 py-4 bg-white hover:bg-slate-50 rounded-xl border-2 border-slate-200 hover:border-blue-500 transition-all duration-300 font-medium text-slate-700 shadow-sm hover:shadow-md" data-index="${index}">
                 <span class="flex items-center gap-4">
@@ -108,7 +108,7 @@ const loadQuestion = () => {
 
 // Arrow function untuk handle pemilihan jawaban (Materi 2)
 const handleAnswerSelect = function() {
-    if (selectedAnswer !== null) return; // Prevent multiple selections
+    if (selectedAnswer !== null) return;
     
     selectedAnswer = parseInt($(this).data('index'));
     const correctAnswer = quizData[currentQuestion].correct;
@@ -139,7 +139,7 @@ const handleAnswerSelect = function() {
         }
     });
     
-    // Update score dan feedback menggunakan template literal (Materi 3)
+    // Update score dan feedback menggunakan template literal
     if (selectedAnswer === correctAnswer) {
         score++;
         $('#feedback').html(`
@@ -165,7 +165,7 @@ const handleAnswerSelect = function() {
     $('#next-btn').prop('disabled', false);
 };
 
-// Arrow function untuk handle tombol next (Materi 2)
+// Arrow function buat handle tombol next
 const handleNext = () => {
     currentQuestion++;
     
@@ -176,16 +176,16 @@ const handleNext = () => {
     }
 };
 
-// Arrow function untuk menampilkan hasil (Materi 2)
+// Arrow function buat menampilkan hasil
 const showResult = () => {
     $('#quiz-container').addClass('hidden');
     $('#result-container').removeClass('hidden');
     
-    // Template literal untuk menampilkan skor (Materi 3)
+    // Template literal buat menampilkan skor
     const percentage = Math.round((score / quizData.length) * 100);
     $('#score').text(`${score} / ${quizData.length}`);
     
-    // Conditional message menggunakan template literal (Materi 3)
+    // Conditional message
     let message = '';
     if (percentage === 100) {
         message = 'GIGACHAD CONFIRMED! You\'re absolutely based! 🗿💯';
@@ -202,28 +202,26 @@ const showResult = () => {
     $('#score-message').text(message);
 };
 
-// Arrow function untuk restart quiz (Materi 2)
+// Arrow function untuk restart quiz
 const handleRestart = () => {
     initQuiz();
 };
 
 // jQuery document ready
 $(document).ready(() => {
-    // Initialize quiz
     initQuiz();
     
-    // Event listeners menggunakan jQuery
+    // Event listeners pakai jQuery
     $('#next-btn').on('click', handleNext);
     $('#restart-btn').on('click', handleRestart);
 });
 
-// Contoh penggunaan array methods tambahan (Materi 7)
-// Filter soal berdasarkan kategori (jika diperlukan di masa depan)
+// array methods tambahan
 const filterQuestionsByKeyword = (keyword) => {
     return quizData.filter(q => q.question.toLowerCase().includes(keyword.toLowerCase()));
 };
 
-// Get semua jawaban yang benar menggunakan map (Materi 7)
+// Get semua jawaban yang benar
 const getCorrectAnswers = () => {
     return quizData.map(q => q.options[q.correct]);
 };
