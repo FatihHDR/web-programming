@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Books Library - Professional Book Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        .book-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .book-card:hover {
+            transform: translateY(-8px);
+        }
+        .book-cover {
+            transition: transform 0.3s ease;
+        }
+        .book-card:hover .book-cover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 font-sans antialiased">
+    
+    <!-- Hero Header -->
+    <header class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAzMHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+            <!-- Logo & Title -->
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-lg rounded-2xl mb-4 shadow-2xl">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-3">
+                    Google Books Library
+                </h1>
+                <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto">
+                    Jelajahi jutaan buku dari seluruh dunia. Temukan bacaan favorit Anda dengan mudah.
+                </p>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="max-w-3xl mx-auto">
+                <form id="search-form" class="relative">
+                    <div class="relative flex items-center">
+                        <div class="absolute left-5 pointer-events-none">
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            placeholder="Cari judul, penulis, ISBN, atau topik buku..." 
+                            class="w-full pl-14 pr-36 py-5 text-lg bg-white text-gray-800 rounded-2xl shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-300/50 transition-all placeholder:text-gray-400"
+                            value="JavaScript"
+                        />
+                        <button 
+                            type="submit"
+                            id="search-btn" 
+                            class="absolute right-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center gap-2">
+                            <span class="hidden sm:inline">Cari Buku</span>
+                            <span class="sm:hidden">Cari</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Quick Filters -->
+                <div class="mt-4 flex flex-wrap gap-2 justify-center">
+                    <button class="quick-search px-4 py-2 bg-white/20 backdrop-blur-md text-white text-sm font-medium rounded-lg hover:bg-white/30 transition-colors" data-query="programming">
+                        💻 Programming
+                    </button>
+                    <button class="quick-search px-4 py-2 bg-white/20 backdrop-blur-md text-white text-sm font-medium rounded-lg hover:bg-white/30 transition-colors" data-query="fiction">
+                        📖 Fiction
+                    </button>
+                    <button class="quick-search px-4 py-2 bg-white/20 backdrop-blur-md text-white text-sm font-medium rounded-lg hover:bg-white/30 transition-colors" data-query="science">
+                        🔬 Science
+                    </button>
+                    <button class="quick-search px-4 py-2 bg-white/20 backdrop-blur-md text-white text-sm font-medium rounded-lg hover:bg-white/30 transition-colors" data-query="history">
+                        🏛️ History
+                    </button>
+                    <button class="quick-search px-4 py-2 bg-white/20 backdrop-blur-md text-white text-sm font-medium rounded-lg hover:bg-white/30 transition-colors" data-query="business">
+                        💼 Business
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 pb-20">
+        <!-- Stats Bar -->
+        <div id="stats-bar" class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 mb-10 hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <!-- Left: Total Count -->
+                <div class="flex items-center gap-4">
+                    <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Total Hasil</p>
+                        <div class="flex items-baseline gap-2">
+                            <span id="result-count" class="text-3xl font-black text-gray-900">0</span>
+                            <span class="text-lg font-medium text-gray-500">buku</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right: Search Term -->
+                <div class="flex flex-col md:items-end gap-2">
+                    <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Kata Kunci Pencarian</p>
+                    <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-200 max-w-full">
+                        <svg class="w-4 h-4 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <span class="text-base font-bold text-blue-700 truncate" id="search-term"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Grid -->
+        <div id="buku-container" class="min-h-[400px]">
+            <!-- Loading State -->
+            <div class="flex flex-col items-center justify-center py-24">
+                <div class="relative">
+                    <div class="animate-spin rounded-full h-20 w-20 border-4 border-blue-200"></div>
+                    <div class="animate-spin rounded-full h-20 w-20 border-t-4 border-blue-600 absolute top-0"></div>
+                </div>
+                <p class="mt-6 text-lg font-semibold text-gray-600">Memuat koleksi buku...</p>
+                <p class="mt-2 text-sm text-gray-400">Mohon tunggu sebentar</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-bold">Google Books Library</p>
+                        <p class="text-sm text-gray-400">Powered by Google Books API</p>
+                    </div>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-sm text-gray-400">© 2025 All Rights Reserved</p>
+                    <p class="text-xs text-gray-500 mt-1">Built with Tailwind CSS & jQuery</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
